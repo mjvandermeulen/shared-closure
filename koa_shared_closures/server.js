@@ -1,12 +1,11 @@
-const Koa = require('koa');
+const Koa = require("koa");
 const app = new Koa();
-const serve = require('koa-static');
+const serve = require("koa-static");
 
-app.use(serve('.'));
+app.use(serve("src"));
 
-port = 4545
+port = 4545;
 
-app.listen(port, function() {
+app.listen(port, function () {
   console.log(`Server running on https://localhost:${port}`);
 });
-
