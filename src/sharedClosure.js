@@ -42,16 +42,12 @@ for (let i = 0; i < 3; i++) {
 }
 
 function showResult(key) {
-  console.log(key);
   s = document.getElementById(key);
   s.innerHTML = methods[key].list;
 }
 
 function createResultsButtons() {
-  console.log("BOOM");
   for (const [key, method] of Object.entries(methods)) {
-    console.log(method.name);
-    console.log(method.list);
     rl = document.getElementById("results");
 
     li = document.createElement("li");
@@ -64,4 +60,22 @@ function createResultsButtons() {
   }
 }
 
-window.onload = createResultsButtons;
+function insertCode(text) {
+  const codeBlock = document.getElementById("code");
+  codeBlock.textContent = text; // not innerHTML!!! text needs to be escaped.
+  Prism.highlightAll();
+}
+
+function displayJS() {
+  const myRequest = new Request("sharedClosure.js");
+  fetch(myRequest).then(function (response) {
+    return response.text().then(function (text) {
+      insertCode(text);
+    });
+  });
+}
+
+window.onload = () => {
+  createResultsButtons();
+  displayJS();
+};
