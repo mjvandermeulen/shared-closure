@@ -5,11 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shared Closure</title>
 
-    <script src="sharedClosure.js"></script>
+    <link href="themes/prism.css" rel="stylesheet" />
   </head>
   <body>
     <div>
       <ul id="results" />
     </div>
+    <div>
+      <pre><code id="code" class="language-js">
+        function insertCode(text) {
+          const codeBlock = document.getElementById("code");
+          codeBlock.textContent = text; // not innerHTML!!! text needs to be escaped.
+          
+        }
+        
+        function displayJS() {
+          const myRequest = new Request("sharedClosure.js");
+          fetch(myRequest).then(function (response) {
+            return response.text().then(function (text) {
+              insertCode(text);
+            });
+          });
+        }
+        
+        window.onload = () => {
+          createResultsButtons();
+          displayJS();
+        };</code></pre>
+    </div>
+    <script src="sharedClosure.js"></script>
+    <script src="prism.js" data-manual></script>
   </body>
 </html>

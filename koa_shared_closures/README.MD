@@ -16,3 +16,4 @@ I want to be able to fetch this file in order to show it in the browser (using [
   - rounded corners
 - Typescript
 - Svelte
+- prettier repo copy

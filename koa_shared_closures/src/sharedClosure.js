@@ -64,4 +64,22 @@ function createResultsButtons() {
   }
 }
 
-window.onload = createResultsButtons;
+function insertCode(text) {
+  const codeBlock = document.getElementById("code");
+  codeBlock.textContent = text; // not innerHTML!!! text needs to be escaped.
+  Prism.highlightAll();
+}
+
+function displayJS() {
+  const myRequest = new Request("sharedClosure.js");
+  fetch(myRequest).then(function (response) {
+    return response.text().then(function (text) {
+      insertCode(text);
+    });
+  });
+}
+
+window.onload = () => {
+  createResultsButtons();
+  displayJS();
+};
