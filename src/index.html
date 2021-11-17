@@ -12,28 +12,16 @@
       <ul id="results" />
     </div>
     <div>
-      <pre><code id="code" class="language-js">
-        function insertCode(text) {
-          const codeBlock = document.getElementById("code");
-          codeBlock.textContent = text; // not innerHTML!!! text needs to be escaped.
-          
-        }
-        
-        function displayJS() {
-          const myRequest = new Request("sharedClosure.js");
-          fetch(myRequest).then(function (response) {
-            return response.text().then(function (text) {
-              insertCode(text);
-            });
-          });
-        }
-        
-        window.onload = () => {
-          createResultsButtons();
-          displayJS();
-        };</code></pre>
+      <button onClick="toggleSyntaxHighlighting()">
+        Toggle Syntax Highlighting
+      </button>
+    </div>
+    <div>
+      <pre><code id="code" class="language-js"></code></pre>
     </div>
     <script src="sharedClosure.js"></script>
-    <script src="code/prism.js" data-manual></script>
+    <!-- Removed data-manual: the initial code block needs to be colored 
+      script src="code/prism.js" data-manual></script> -->
+    <script src="code/prism.js"></script>
   </body>
 </html>

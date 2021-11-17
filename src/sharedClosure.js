@@ -1,3 +1,6 @@
+let syntaxLitHigh = false;
+let exampleCode = "";
+
 function count() {
   let counter = 0;
 
@@ -60,22 +63,32 @@ function createResultsButtons() {
   }
 }
 
-function insertCode(text) {
+function insertCode() {
   const codeBlock = document.getElementById("code");
-  codeBlock.textContent = text; // not innerHTML!!! text needs to be escaped.
-  Prism.highlightAll();
+  codeBlock.textContent = exampleCode; // not innerHTML!!! text needs to be escaped.
 }
 
-function displayJS() {
+function loadAndInsertExampleCode() {
+  // TODO play with promises here.
   const myRequest = new Request("sharedClosure.js");
-  fetch(myRequest).then(function (response) {
+  return fetch(myRequest).then(function (response) {
     return response.text().then(function (text) {
-      insertCode(text);
+      exampleCode = text;
+      insertCode();
     });
   });
 }
 
+function toggleSyntaxHighlighting() {
+  syntaxLitHigh = !syntaxLitHigh;
+  if (syntaxLitHigh) {
+    Prism.highlightAll();
+  } else {
+    insertCode();
+  }
+}
+
 window.onload = () => {
   createResultsButtons();
-  displayJS();
+  loadAndInsertExampleCode();
 };
