@@ -10,10 +10,12 @@ I want to be able to fetch this file in order to show it in the browser (using [
 
 # Plans
 
-- One repo, with clear branches.
-- CSS:
-  - grid
-  - rounded corners
-- Typescript
-- Svelte
-- prettier repo copy
+- [ ] One repo, with clear branches.
+- [x] Koa with Prism. branch: koa-prism
+- [ ] CSS:
+  - [ ] grid
+  - [ ] rounded corners
+- [ ] Typescript
+- [ ] Svelte
+- [ ] prettier repo copy
+- [ ] SVG

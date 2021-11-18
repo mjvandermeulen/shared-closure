@@ -33,6 +33,16 @@ const results = {
     list: [],
     function: count5,
   },
+  addDotOne: {
+    name: "Count Dot 1",
+    list: [],
+    function: add.byOnes,
+  },
+  addDotFive: {
+    name: "Count Dot 5",
+    list: [],
+    function: add.byFives,
+  },
 };
 
 const numResults = 3;
