@@ -5,13 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shared Closure</title>
 
+    <link href="index.css" rel="stylesheet" />
     <link href="themes/prism.css" rel="stylesheet" />
     <script src="index.js"></script>
     <script src="sharedClosure.js"></script>
   </head>
   <body>
+    <h1>New Grid</h1>
+    <div id="challenge">
+      <div class="name method-1 cell">Add 1</div>
+      <div class="inp method-1 cell"><input type="text" value="?" /></div>
+      <div class="inp method-1 cell"><input type="text" value="?" /></div>
+      <div class="inp method-1 cell"><input type="text" value="?" /></div>
+      <div class="ans-wrapper method-1 ans-collapsed">
+        <div class="ans method-1 cell">1</div>
+      </div>
+      <div class="ans-wrapper method-1 ans-collapsed">
+        <div class="ans method-1 cell">2</div>
+      </div>
+      <div class="ans-wrapper method-1 ans-collapsed">
+        <div class="ans method-1 cell">3</div>
+      </div>
+      <button class="show method-1 cell" onClick="answer(1)">Show</button>
+
+      <div class="name method-2 cell">Add 5</div>
+      <div class="inp method-2 cell"><input type="text" value="?" /></div>
+      <div class="inp method-2 cell"><input type="text" value="?" /></div>
+      <div class="inp method-2 cell"><input type="text" value="?" /></div>
+      <div class="ans-wrapper method-2 ans-collapsed">
+        <div class="ans method-2 cell">5</div>
+      </div>
+      <div class="ans-wrapper method-2 ans-collapsed">
+        <div class="ans method-2 cell">10</div>
+      </div>
+      <div class="ans-wrapper method-2 ans-collapsed">
+        <div class="ans method-2 cell">15</div>
+      </div>
+      <button class="show method-2 cell" onClick="answer(2)">Show</button>
+    </div>
+
+    <h1>Old Results</h1>
     <div>
-      <ul id="results" />
+      <ul id="OLDRESULTS" />
     </div>
     <div>
       <button onClick="toggleSyntaxHighlighting()">
