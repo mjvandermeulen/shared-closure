@@ -1,5 +1,6 @@
 :root {
-  --answer-height: 1000; /* integer, so you can get the neg value */
+  /* start with educated guess, so no far transition will take place init. */
+  --answer-height: 0; /* no unit ("px") integer, so you can get the neg value */
 }
 
 /* grid */
@@ -45,7 +46,9 @@
 /* show answer transition */
 .ans-wrapper {
   overflow: hidden;
-  max-height: calc(var(--answer-height) * 1px);
+  /* use * 1.5 for delayed drop down effect */
+  /* LEARN **** how to add "px" unit to value */
+  max-height: calc(var(--answer-height) * 1 * 1px);
   transition: max-height 2s;
 }
 

@@ -4,9 +4,9 @@ const root = document.querySelector(":root");
 // NEW GRID CODE
 
 function answer(method) {
+  // LEARN. How to read CCS var()s
   rs = getComputedStyle(root);
-  answerHeight = rs.getPropertyValue("--answer-height");
-
+  answerHeight = rs.getPropertyValue("--answer-height"); // NEW GRID CODE
   const ansWrappers = document.querySelectorAll(
     `#challenge .method-${method}.ans-wrapper`
   );
@@ -31,9 +31,11 @@ function measureAnswerHeight() {
   const ansElement = ansWrappers[0].children[0];
   const wrapperHeight = ansElement.offsetHeight;
   const style = window.getComputedStyle(ansElement);
-  mTop = parseFloat(style.marginTop);
-  mBottom = parseFloat(style.marginBottom);
-  const newHeight = (wrapperHeight + mTop + mBottom) * 2;
+  // LEARN ****
+  // https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+  mTop = parseFloat(style.getPropertyValue("margin-top"));
+  mBottom = parseFloat(style.getPropertyValue("margin-bottom"));
+  const newHeight = wrapperHeight + mTop + mBottom;
   root.style.setProperty("--answer-height", newHeight);
   console.log(
     "answer height set to " + wrapperHeight + mTop + mBottom + "======"
