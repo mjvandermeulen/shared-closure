@@ -1,3 +1,7 @@
+:root {
+  --answer-height: 1000; /* integer, so you can get the neg value */
+}
+
 /* grid */
 
 #challenge {
@@ -41,15 +45,18 @@
 /* show answer transition */
 .ans-wrapper {
   overflow: hidden;
-  max-height: 100px;
-  transition: max-height 2s, opacity 2s;
-  /* padding-bottom: 4px */
+  max-height: calc(var(--answer-height) * 1px);
+  transition: max-height 2s;
 }
 
 .ans-collapsed {
   max-height: 0;
-  opacity: 0;
-  /* padding-bottom: 0 */
+  opacity: 0.7;
+}
+
+.ans-wrapper .ans.cell {
+  transition: transform 2s;
+  transform: translateY(calc(var(--answer-height) * -1 * 1px));
 }
 /* input */
 

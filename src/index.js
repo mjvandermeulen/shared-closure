@@ -1,14 +1,43 @@
 let syntaxLitHigh = false;
 let exampleCode = "";
-
+const root = document.querySelector(":root");
 // NEW GRID CODE
 
 function answer(method) {
-  document
-    .querySelectorAll(`#challenge .method-${method}.ans-wrapper`)
-    .forEach((el) => {
-      el.classList.toggle("ans-collapsed");
-    });
+  rs = getComputedStyle(root);
+  answerHeight = rs.getPropertyValue("--answer-height");
+
+  const ansWrappers = document.querySelectorAll(
+    `#challenge .method-${method}.ans-wrapper`
+  );
+  const answersCollapsed = ansWrappers[0].classList.contains("ans-collapsed");
+  console.log(answerHeight + "answerHeight");
+
+  ansWrappers.forEach((wrapper) => {
+    if (answersCollapsed) {
+      wrapper.classList.remove("ans-collapsed");
+      wrapper.children[0].style.transform = "translateY(0)";
+    } else {
+      wrapper.classList.add("ans-collapsed");
+      wrapper.children[0].style.transform = `translateY(${-answerHeight}px)`;
+    }
+  });
+}
+
+function measureAnswerHeight() {
+  // assume all wrappers are similar in the whole grid
+  const ansWrappers = document.querySelectorAll("#challenge .ans-wrapper");
+  // https://developer.mozilla.org/en-US/docs/Web/API/Element/clientWidth
+  const ansElement = ansWrappers[0].children[0];
+  const wrapperHeight = ansElement.offsetHeight;
+  const style = window.getComputedStyle(ansElement);
+  mTop = parseFloat(style.marginTop);
+  mBottom = parseFloat(style.marginBottom);
+  const newHeight = (wrapperHeight + mTop + mBottom) * 2;
+  root.style.setProperty("--answer-height", newHeight);
+  console.log(
+    "answer height set to " + wrapperHeight + mTop + mBottom + "======"
+  );
 }
 
 // END NEW GRID CODE
@@ -23,7 +52,6 @@ function showResult(key) {
 let showRes = false;
 
 function show(result) {
-  console.log("show called");
   showRes = !showRes;
   if (result == "res1") {
     resDivs = document.querySelectorAll("div#test");
@@ -33,7 +61,7 @@ function show(result) {
   }
 }
 
-function createResultsButtons() {
+function createResultsButtonsOLD() {
   for (const [key, method] of Object.entries(results)) {
     rl = document.getElementById("OLDRESULTS");
 
@@ -73,6 +101,11 @@ function toggleSyntaxHighlighting() {
 }
 
 window.onload = () => {
-  createResultsButtons();
   loadAndInsertExampleCode();
+  createResultsButtonsOLD();
+  measureAnswerHeight();
+};
+
+window.onresize = () => {
+  measureAnswerHeight();
 };
