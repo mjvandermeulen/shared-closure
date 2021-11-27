@@ -6,7 +6,7 @@ I want to be able to fetch this file in order to show it in the browser (using [
 
 # Run
 
-- dev: `npm run dev`
+- dev: `npm run dev -- --port=8080`
 
 # Plans
 
@@ -19,3 +19,11 @@ I want to be able to fetch this file in order to show it in the browser (using [
 - [ ] Svelte
 - [ ] prettier repo copy
 - [ ] SVG
+
+# Learned:
+
+https://www.twilio.com/blog/npm-scripts
+
+pass arguments to the server.js parameter (not to npm)
+
+    npm run dev -- --port=8080
