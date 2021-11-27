@@ -2,10 +2,14 @@ const Koa = require("koa");
 const app = new Koa();
 const serve = require("koa-static");
 
+// Read port argument (if provided)
+const yargs = require("yargs/yargs");
+const { hideBin } = require("yargs/helpers");
+const argv = yargs(hideBin(process.argv)).argv;
+const port = argv.port || 8080;
+
 app.use(serve("src"));
 
-port = 4545;
-
 app.listen(port, function () {
-  console.log(`Server running on https://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });

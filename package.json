@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "koa": "^2.13.4",
-    "koa-static": "^5.0.0"
+    "koa-static": "^5.0.0",
+    "yargs": "^17.2.1"
   },
   "scripts": {
     "dev": "nodemon server.js"
@@ -9,7 +10,6 @@
   "name": "shared_closures",
   "version": "1.0.0",
   "main": "server.js",
-  "devDependencies": {},
   "author": "",
   "license": "ISC",
   "description": ""
