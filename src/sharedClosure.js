@@ -22,10 +22,11 @@ const count5 = count().byFives;
 
 const add = count();
 
+// change to methods **** = {
 const results = {
   addOne: {
     name: "Count 1",
-    list: [],
+    list: [], // change to answers: [] ****
     function: count1,
   },
   addFive: {

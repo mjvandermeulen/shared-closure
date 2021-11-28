@@ -1,34 +1,33 @@
 :root {
   /* start with educated guess, so no far transition will take place init. */
-  --answer-height: 0; /* no unit ("px") integer, so you can get the neg value */
+  --answer-height: 50; /* no unit ("px") integer, so you can get the neg value */
 }
 
 /* grid */
 
-#challenge {
+#challenge .method {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 1fr min-content); /* LEARN */
+  grid-template-rows: 1fr min-content; /* LEARN */
   gap: 0; /* STRATEGY: make gaps with margins around cells.
   otherwise the results row will have a gap, even when height is 0 */
-  /* width: 100%; NOT NEEDED I THINK*/
 }
 
 .cell {
   margin: 10px;
   padding: 10px;
-  border: 3px red solid;
+  border: 3px turquoise solid;
   border-radius: 5px;
 }
 
-.method-1 {
+.method .cell {
   grid-row: 1/3;
 }
 
-.method-1.inp {
+.method .inp {
   grid-row: 1/2;
 }
-.method-1.ans-wrapper {
+.method .ans {
   grid-row: 2/3;
 }
 

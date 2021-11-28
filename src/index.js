@@ -3,6 +3,75 @@ let exampleCode = "";
 const root = document.querySelector(":root");
 // NEW GRID CODE
 
+function nameDiv(methodKey) {
+  const d = document.createElement("div");
+  d.classList.add("cell");
+  const content = document.createTextNode(results[methodKey].name);
+  d.appendChild(content);
+
+  return d;
+}
+
+function inputCell(i) {
+  const d = document.createElement("div");
+  d.innerHTML = `
+    <input type="text" value="?" />
+  `;
+  d.classList.add("inp", `inp-${i}`, "cell");
+
+  return d;
+}
+
+function answerWrapper(methodKey, i) {
+  const d = document.createElement("div");
+  d.innerHTML = `
+    <div class="cell">${results[methodKey].list[i]}
+  `;
+  d.classList.add("ans", "wrapper");
+
+  return d;
+}
+
+function handleCheck(methodKey) {
+  console.log("Check clicked. methodKey: " + methodKey);
+}
+
+function checkButton(methodKey) {
+  const b = document.createElement("button");
+  b.classList.add("check", `check-${methodKey}`, "cell");
+  b.onclick = () => {
+    handleCheck(methodKey);
+  };
+  const c = document.createTextNode("Check");
+  b.appendChild(c);
+
+  return b;
+}
+
+function methodRow(methodKey) {
+  const method = results[methodKey];
+  const row = document.createElement("div");
+  row.classList.add("method", `method-${methodKey}`);
+  row.appendChild(nameDiv(methodKey));
+  for (let i = 0; i < method.list.length; i++) {
+    // left off HERE ******** change to
+    row.appendChild(inputCell(i));
+    row.appendChild(answerWrapper(methodKey, i));
+  }
+  row.appendChild(checkButton(methodKey));
+
+  return row;
+}
+
+function createChallenges() {
+  parent = document.getElementById("challenge");
+  for (const methodKey in results) {
+    console.log("result: " + results[methodKey].name);
+    console.log("methodKey: " + methodKey);
+    parent.appendChild(methodRow(methodKey));
+  }
+}
+
 function answer(method) {
   // LEARN. How to read CCS var()s
   rs = getComputedStyle(root);
@@ -26,7 +95,8 @@ function answer(method) {
 
 function measureAnswerHeight() {
   // assume all wrappers are similar in the whole grid
-  const ansWrappers = document.querySelectorAll("#challenge .ans-wrapper");
+  // **** better: measure all wrappers and return the max height.
+  const ansWrappers = document.querySelectorAll(`#challenge .ans-wrapper`);
   // https://developer.mozilla.org/en-US/docs/Web/API/Element/clientWidth
   const ansElement = ansWrappers[0].children[0];
   const wrapperHeight = ansElement.offsetHeight;
@@ -63,26 +133,12 @@ function show(result) {
   }
 }
 
-function createResultsButtonsOLD() {
-  for (const [key, method] of Object.entries(results)) {
-    rl = document.getElementById("OLDRESULTS");
-
-    li = document.createElement("li");
-    li.innerHTML = `
-    <li>
-      <button onClick="showResult('${key}')">show ${method.name}</button>
-      <span id="${key}"/>
-    </li>`;
-    rl.appendChild(li);
-  }
-}
-
 function insertCode() {
   const codeBlock = document.getElementById("code");
   codeBlock.textContent = exampleCode; // not innerHTML!!! text needs to be escaped.
 }
 
-function loadAndInsertExampleCode() {
+function displaySampleCode() {
   // TODO play with promises here.
   const myRequest = new Request("sharedClosure.js");
   return fetch(myRequest).then(function (response) {
@@ -103,11 +159,14 @@ function toggleSyntaxHighlighting() {
 }
 
 window.onload = () => {
-  loadAndInsertExampleCode();
-  createResultsButtonsOLD();
-  measureAnswerHeight();
+  displaySampleCode();
+  createChallenges();
+  measureAnswerHeight(); // ***** I think this works here
+  // since the inserting of code is synchronous
 };
 
 window.onresize = () => {
   measureAnswerHeight();
 };
+
+//MDN: document.body.onload https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
