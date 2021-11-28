@@ -27,20 +27,16 @@ function answerWrapper(methodKey, i) {
   d.innerHTML = `
     <div class="cell">${results[methodKey].list[i]}
   `;
-  d.classList.add("ans", "wrapper");
+  d.classList.add("ans", "wrapper", "collapsed");
 
   return d;
-}
-
-function handleCheck(methodKey) {
-  console.log("Check clicked. methodKey: " + methodKey);
 }
 
 function checkButton(methodKey) {
   const b = document.createElement("button");
   b.classList.add("check", `check-${methodKey}`, "cell");
   b.onclick = () => {
-    handleCheck(methodKey);
+    checkAnswer(methodKey);
   };
   const c = document.createTextNode("Check");
   b.appendChild(c);
@@ -64,23 +60,21 @@ function methodRow(methodKey) {
 }
 
 function createChallenges() {
-  parent = document.getElementById("challenge");
+  const parent = document.getElementById("challenge");
   for (const methodKey in results) {
-    console.log("result: " + results[methodKey].name);
-    console.log("methodKey: " + methodKey);
     parent.appendChild(methodRow(methodKey));
   }
 }
 
-function answer(method) {
-  // LEARN. How to read CCS var()s
-  rs = getComputedStyle(root);
-  answerHeight = rs.getPropertyValue("--answer-height"); // NEW GRID CODE
+function OLDanswer(method) {
+  // OLD, but LEARN how to read CCS var()s ****
+  // const rs = getComputedStyle(root);
+  // answerHeight = rs.getPropertyValue("--answer-height");
+
   const ansWrappers = document.querySelectorAll(
     `#challenge .method-${method}.ans-wrapper`
   );
   const answersCollapsed = ansWrappers[0].classList.contains("ans-collapsed");
-  console.log(answerHeight + "answerHeight");
 
   ansWrappers.forEach((wrapper) => {
     if (answersCollapsed) {
@@ -93,10 +87,23 @@ function answer(method) {
   });
 }
 
+function checkAnswer(methodKey) {
+  const ansWrappers = document.querySelectorAll(
+    `#challenge .method-${methodKey} .ans.wrapper`
+  );
+
+  console.log("found this many wrappers: " + ansWrappers.length);
+
+  ansWrappers.forEach((wrapper) => {
+    wrapper.classList.toggle("collapsed");
+  });
+  console.log("Check clicked. methodKey: " + methodKey);
+}
+
 function measureAnswerHeight() {
   // assume all wrappers are similar in the whole grid
   // **** better: measure all wrappers and return the max height.
-  const ansWrappers = document.querySelectorAll(`#challenge .ans-wrapper`);
+  const ansWrappers = document.querySelectorAll(`#challenge .ans.wrapper`);
   // https://developer.mozilla.org/en-US/docs/Web/API/Element/clientWidth
   const ansElement = ansWrappers[0].children[0];
   const wrapperHeight = ansElement.offsetHeight;
@@ -108,30 +115,11 @@ function measureAnswerHeight() {
   const newHeight = wrapperHeight + mTop + mBottom;
   root.style.setProperty("--answer-height", newHeight);
   console.log(
-    "answer height set to " + wrapperHeight + mTop + mBottom + "======"
+    "answer height set to " + (wrapperHeight + mTop + mBottom) + "   ======"
   );
 }
 
 // END NEW GRID CODE
-
-function showResult(key) {
-  s = document.getElementById(key);
-  s.innerHTML = results[key].list;
-}
-
-// ******* cleanup
-
-let showRes = false;
-
-function show(result) {
-  showRes = !showRes;
-  if (result == "res1") {
-    resDivs = document.querySelectorAll("div#test");
-    resDivs.forEach((element) => {
-      element.style.maxHeight = showRes ? "100px" : "0";
-    });
-  }
-}
 
 function insertCode() {
   const codeBlock = document.getElementById("code");

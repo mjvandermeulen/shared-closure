@@ -31,19 +31,8 @@
   grid-row: 2/3;
 }
 
-.method-2 {
-  grid-row: 3/5;
-}
-
-.method-2.inp {
-  grid-row: 3/4;
-}
-.method-2.ans-wrapper {
-  grid-row: 4/5;
-}
-
 /* show answer transition */
-.ans-wrapper {
+.method .ans.wrapper {
   overflow: hidden;
   /* use * 1.5 for delayed drop down effect */
   /* LEARN **** how to add "px" unit to value */
@@ -51,17 +40,21 @@
   transition: max-height 2s;
 }
 
-.ans-collapsed {
+.method .ans.collapsed {
   max-height: 0;
-  opacity: 0.7;
+  opacity: 0.7; /* change to 0? **** */
 }
 
-.ans-wrapper .ans.cell {
+.ans .cell {
   transition: transform 2s;
+  transform: translateY((0));
+}
+
+.method .ans.collapsed .cell {
   transform: translateY(calc(var(--answer-height) * -1 * 1px));
 }
-/* input */
 
+/* input */
 input[type="text"] {
   border: none;
   outline: none;
