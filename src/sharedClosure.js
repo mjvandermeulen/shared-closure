@@ -17,39 +17,52 @@ function count() {
   };
 }
 
-const count1 = count().byOnes;
-const count5 = count().byFives;
+const c1 = count().byOnes;
+const c5 = count().byFives;
+const c = count();
 
-const add = count();
-
-// change to methods **** = {
-const results = {
-  addOne: {
-    name: "Count 1",
-    list: [], // change to answers: [] ****
-    function: count1,
-  },
-  addFive: {
-    name: "Count 5",
-    list: [],
-    function: count5,
-  },
-  addDotOne: {
-    name: "Count Dot 1",
-    list: [],
-    function: add.byOnes,
-  },
-  addDotFive: {
-    name: "Count Dot 5",
-    list: [],
-    function: add.byFives,
-  },
-};
+const c1Answers = [];
+const c5Answers = [];
+const cByOnesAnswers = [];
+const cByFivesAnswers = [];
 
 const numResults = 3;
-
-for (let i = 0; i < numResults; i++) {
-  for (const [_, result] of Object.entries(results)) {
-    result.list.push(result.function());
-  }
+for (i = 0; i < numResults; i++) {
+  c1Answers.push(c1());
+  c5Answers.push(c5());
+  cByOnesAnswers.push(c.byOnes());
+  cByFivesAnswers.push(c.byFives());
 }
+
+// The grid above will show the answer arrays,
+// after you try to fill in the correct answers
+// yourself first.
+
+// move out of sharedClosure, to "STATE"?
+// change results to methods ****
+const results = {
+  addOne: {
+    name: "c1()",
+    list: c1Answers, // change list to answers: [] ****
+    checked: false,
+    showing: false,
+  },
+  addFive: {
+    name: "c5()",
+    list: c5Answers,
+    checked: false,
+    showing: false,
+  },
+  addDotOne: {
+    name: "c.byOnes()",
+    list: cByOnesAnswers,
+    checked: false,
+    showing: false,
+  },
+  addDotFive: {
+    name: "c.byFives()",
+    list: cByFivesAnswers,
+    checked: false,
+    showing: false,
+  },
+};

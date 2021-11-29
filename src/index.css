@@ -3,11 +3,16 @@
   --answer-height: 50; /* no unit ("px") integer, so you can get the neg value */
 }
 
+body {
+  max-width: 600px;
+  margin: auto;
+}
+
 /* grid */
 
 #challenge .method {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 2fr repeat(3, 1fr) 2fr;
   grid-template-rows: 1fr min-content; /* LEARN */
   gap: 0; /* STRATEGY: make gaps with margins around cells.
   otherwise the results row will have a gap, even when height is 0 */
