@@ -54,6 +54,14 @@
   transform: translateY(calc(var(--answer-height) * -1 * 1px));
 }
 
+.method .inp.cell.incorrect {
+  border-color: red;
+}
+
+.method .inp.cell.correct {
+  border-color: green;
+}
+
 /* input */
 input[type="text"] {
   border: none;

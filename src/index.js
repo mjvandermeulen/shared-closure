@@ -1,5 +1,10 @@
 let syntaxLitHigh = false;
 let exampleCode = "";
+
+// ******* next lines need to be per method!!!
+let answersChecked = false;
+let answersShown = false;
+
 const root = document.querySelector(":root");
 // NEW GRID CODE
 
@@ -15,7 +20,7 @@ function nameDiv(methodKey) {
 function inputCell(i) {
   const d = document.createElement("div");
   d.innerHTML = `
-    <input type="text" value="?" />
+    <input type="text" placeholder="___" />
   `;
   d.classList.add("inp", `inp-${i}`, "cell");
 
@@ -35,8 +40,8 @@ function answerWrapper(methodKey, i) {
 function checkButton(methodKey) {
   const b = document.createElement("button");
   b.classList.add("check", `check-${methodKey}`, "cell");
-  b.onclick = () => {
-    checkAnswer(methodKey);
+  b.onclick = (event) => {
+    handleCheckClick(event, methodKey);
   };
   const c = document.createTextNode("Check");
   b.appendChild(c);
@@ -66,38 +71,40 @@ function createChallenges() {
   }
 }
 
-function OLDanswer(method) {
-  // OLD, but LEARN how to read CCS var()s ****
-  // const rs = getComputedStyle(root);
-  // answerHeight = rs.getPropertyValue("--answer-height");
+function checkAnswers(methodKey) {
+  // **** inp-1 numbering not needed
+  const inpDivs = document.querySelectorAll(`
+      #challenge .method-${methodKey} .inp
+    `);
 
-  const ansWrappers = document.querySelectorAll(
-    `#challenge .method-${method}.ans-wrapper`
-  );
-  const answersCollapsed = ansWrappers[0].classList.contains("ans-collapsed");
-
-  ansWrappers.forEach((wrapper) => {
-    if (answersCollapsed) {
-      wrapper.classList.remove("ans-collapsed");
-      wrapper.children[0].style.transform = "translateY(0)";
+  for (let i = 0; i < inpDivs.length; i++) {
+    const input = inpDivs[i].getElementsByTagName("input")[0];
+    if (input.value == results[methodKey].list[i]) {
+      inpDivs[i].classList.add("correct");
+      inpDivs[i].classList.remove("incorrect");
     } else {
-      wrapper.classList.add("ans-collapsed");
-      wrapper.children[0].style.transform = `translateY(${-answerHeight}px)`;
+      inpDivs[i].classList.add("incorrect");
+      inpDivs[i].classList.remove("correct");
     }
-  });
+  }
 }
 
-function checkAnswer(methodKey) {
-  const ansWrappers = document.querySelectorAll(
-    `#challenge .method-${methodKey} .ans.wrapper`
-  );
+function handleCheckClick(event, methodKey) {
+  if (!answersChecked) {
+    checkAnswers(methodKey);
+    event.target.innerText = "Show";
+    console.log(event.target);
 
-  console.log("found this many wrappers: " + ansWrappers.length);
-
-  ansWrappers.forEach((wrapper) => {
-    wrapper.classList.toggle("collapsed");
-  });
-  console.log("Check clicked. methodKey: " + methodKey);
+    answersChecked = true;
+  } else {
+    // **** turn into show answers function
+    const ansWrappers = document.querySelectorAll(
+      `#challenge .method-${methodKey} .ans.wrapper`
+    );
+    ansWrappers.forEach((wrapper) => {
+      wrapper.classList.toggle("collapsed");
+    });
+  }
 }
 
 function measureAnswerHeight() {
