@@ -6,7 +6,7 @@ const serve = require("koa-static");
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
 const argv = yargs(hideBin(process.argv)).argv;
-const port = argv.port || 8080;
+const port = argv.port || 80;
 
 app.use(serve("src"));
 
