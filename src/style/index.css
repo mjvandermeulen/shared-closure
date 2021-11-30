@@ -32,6 +32,7 @@ button:focus {
   otherwise the results row will have a gap, even when height is 0 */
 }
 
+pre#example.cell,
 .cell {
   margin: 10px;
   padding: 10px;
@@ -109,6 +110,7 @@ button:focus {
 
 /* input */
 input[type="text"] {
+  font-family: inherit;
   border: none;
   outline: none;
   height: 80%;
