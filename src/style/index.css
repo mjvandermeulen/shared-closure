@@ -101,11 +101,36 @@ pre#example.cell,
 }
 
 .method .inp.cell.incorrect {
-  border-color: red;
+  border-color: pink;
+  position: relative;
+  padding-left: 20px;
+}
+
+.method .inp.cell.incorrect::before {
+  content: "";
+  background: no-repeat center/80% url("../img/incorrect.png"); /* 2850 × 2850 pixels */
+  width: 1em;
+  height: 1em;
+  position: absolute;
+  left: 0.5ch;
 }
 
 .method .inp.cell.correct {
-  border-color: green;
+  border-color: #40e08d;
+  position: relative;
+  padding-left: 20px;
+}
+
+.method .inp.cell.correct::before {
+  content: "";
+  background: no-repeat center/100% url("../img/correct.png"); /* 512 x 512 px */
+  width: 1em;
+  height: 1em;
+  /* display: block; */
+  position: absolute;
+  left: 0.5ch;
+  /* right: 0;
+  top: 0; */
 }
 
 /* input */
@@ -113,7 +138,7 @@ input[type="text"] {
   font-family: inherit;
   border: none;
   outline: none;
-  height: 80%;
+  /* height: 80%; */
   width: 100%;
   border-radius: 5px;
 }

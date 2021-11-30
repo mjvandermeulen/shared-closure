@@ -67,7 +67,7 @@ function matchState(methodKey) {
     case "validation-error":
       showValidationError(methodKey, true);
       checkAnswers(methodKey, false); // called by matchState
-      changeButtonText(methodKey, "...");
+      changeButtonText(methodKey, "OK");
       showAnswers(methodKey, false);
       break;
     case "checked":
@@ -104,40 +104,46 @@ function validateInputs(methodKey) {
   return allValid;
 }
 
-function requestSwitchState(methodKey, reqState) {
+function requestSwitchState(methodKey, reqState, force = false) {
   console.log(
     "request Switch State: " + results[methodKey].state + " -> " + reqState
   );
-
-  switch (reqState) {
-    case "base":
-      if (
-        !(
-          results[methodKey].state === "validation-error" &&
-          !validateInputs(methodKey)
-        )
-      ) {
-        results[methodKey].state = "base";
-      }
-      break;
-    case "validation-error": // should never happen...
-      results[methodKey].state = "validation-error";
-      break;
-    case "checked":
-      if (validateInputs(methodKey)) {
-        results[methodKey].state = "checked";
-      } else {
+  if (force) {
+    results[methodKey].state = reqState;
+  } else {
+    switch (reqState) {
+      case "base":
+        if (
+          !(
+            results[methodKey].state === "validation-error" &&
+            !validateInputs(methodKey)
+          )
+        ) {
+          results[methodKey].state = "base";
+        }
+        break;
+      case "validation-error": // should never happen...
         results[methodKey].state = "validation-error";
-      }
-      break;
-    case "showing":
-      // validateIputs is quite redundant: input changes change state to base.
-      if (validateInputs(methodKey) && results[methodKey].state == "checked") {
-        results[methodKey].state = "showing";
-      }
-      break;
-    default:
-      break;
+        break;
+      case "checked":
+        if (validateInputs(methodKey)) {
+          results[methodKey].state = "checked";
+        } else {
+          results[methodKey].state = "validation-error";
+        }
+        break;
+      case "showing":
+        // validateIputs is quite redundant: input changes change state to base.
+        if (
+          validateInputs(methodKey) &&
+          results[methodKey].state == "checked"
+        ) {
+          results[methodKey].state = "showing";
+        }
+        break;
+      default:
+        break;
+    }
   }
   // you could check if state has changed... **** before matching
   matchState(methodKey);
@@ -150,7 +156,9 @@ function handleInputChange(event, methodKey, i) {
 
 function handleCheckClick(event, methodKey) {
   // **** cleanup. event needed?
-  if (results[methodKey].state === "checked") {
+  if (results[methodKey].state === "validation-error") {
+    requestSwitchState(methodKey, "base", true);
+  } else if (results[methodKey].state === "checked") {
     requestSwitchState(methodKey, "showing");
   } else {
     requestSwitchState(methodKey, "checked");
