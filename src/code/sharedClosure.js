@@ -40,29 +40,31 @@ for (i = 0; i < numResults; i++) {
 
 // move out of sharedClosure, to "STATE"?
 // change results to methods ****
+// TODO POSSIBLY IN THE FUTURE: **** great enum with typescript
+// valid values of state:
+// "base"
+// "validation-error" does this disappear immediately on "editing"?
+// "checked"
+// "showing"
 const results = {
   addOne: {
     name: "c1()",
     list: c1Answers, // change list to answers: [] ****
-    checked: false,
-    showing: false,
+    state: "base",
   },
   addFive: {
     name: "c5()",
     list: c5Answers,
-    checked: false,
-    showing: false,
+    state: "base",
   },
   addDotOne: {
     name: "c.byOnes()",
     list: cByOnesAnswers,
-    checked: false,
-    showing: false,
+    state: "base",
   },
   addDotFive: {
     name: "c.byFives()",
     list: cByFivesAnswers,
-    checked: false,
-    showing: false,
+    state: "base",
   },
 };

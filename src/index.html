@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shared Closure</title>
 
-    <link href="index.css" rel="stylesheet" />
-    <link href="themes/prism.css" rel="stylesheet" />
-    <script src="index.js"></script>
-    <script src="sharedClosure.js"></script>
+    <link href="style/index.css" rel="stylesheet" />
+    <link href="style/prism.css" rel="stylesheet" />
   </head>
   <body>
     <div id="challenge"></div>
 
     <div>
-      <button onClick="toggleSyntaxHighlighting()">
+      <button class="cell" onClick="toggleSyntaxHighlighting()">
         Toggle Syntax Highlighting
       </button>
     </div>
@@ -24,5 +22,9 @@
     <!-- Removed data-manual: the initial code block needs to be colored 
       script src="code/prism.js" data-manual></script> -->
     <script src="code/prism.js"></script>
+    <script src="code/index.js"></script>
+    <script src="code/sharedClosure.js"></script>
+    <script src="code/creators.js"></script>
+    <script src="code/checking.js"></script>
   </body>
 </html>
