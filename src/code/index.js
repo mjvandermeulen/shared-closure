@@ -44,6 +44,13 @@ window.onload = () => {
   createChallenges();
   measureAnswerHeight(); // ***** I think this works here
   // since the inserting of code is synchronous
+  inps = document
+    .querySelectorAll("#challenge .method-addOne input")
+    .forEach((inp) => {
+      console.log("here");
+      inp.value = 1;
+    });
+  requestSwitchState("addOne", "checking");
 };
 
 window.onresize = () => {

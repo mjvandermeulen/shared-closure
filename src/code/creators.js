@@ -2,7 +2,7 @@ const INPUTPLACEHOLDER = "__";
 
 function nameDiv(methodKey) {
   const d = document.createElement("div");
-  d.classList.add("cell");
+  d.classList.add("cell", "name");
   const content = document.createTextNode(results[methodKey].name);
   d.appendChild(content);
 

@@ -11,16 +11,15 @@
   <body>
     <div id="challenge"></div>
 
-    <div>
-      <button class="cell" onClick="toggleSyntaxHighlighting()">
-        Toggle Syntax Highlighting
-      </button>
-    </div>
-    <div>
-      <pre
-        id="example"
-        class="cell"
-      ><code id="code" class="language-js"></code></pre>
+    <div id="code-example">
+      <div class="syntax-toggle-wrapper">
+        <button class="syntax-toggle cell" onClick="toggleSyntaxHighlighting()">
+          Syntax Toggle
+        </button>
+      </div>
+      <div>
+        <pre id="example"><code id="code" class="language-js"></code></pre>
+      </div>
     </div>
     <!-- Removed data-manual: the initial code block needs to be colored 
       script src="code/prism.js" data-manual></script> -->
