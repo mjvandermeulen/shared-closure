@@ -2,7 +2,7 @@
   /* start with educated guess, so no far transition will take place init. */
   --answer-height: 50; /* no unit ("px") integer, so you can get the neg value */
   --border: turquoise;
-  --method-border: #bfbfbf;
+  --segment-border-color: #bfbfbf;
   --focus-color: #e5fbf9;
 }
 
@@ -18,6 +18,20 @@ button {
   font-size: inherit;
 }
 
+#intro {
+  padding: 20px;
+  text-align: center;
+}
+
+/* cell need to go here */
+
+.segment {
+  border: 3px var(--segment-border-color) solid;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+/* move */
 #challenge button:focus {
   outline: none;
   background-color: var(--focus-color);
@@ -31,10 +45,6 @@ button {
   grid-template-rows: min-content min-content 1fr min-content; /* LEARN */
   gap: 0; /* STRATEGY: make gaps with margins around cells.
   otherwise the results row will have a gap, even when height is 0 */
-
-  border: 3px var(--method-border) solid;
-  border-radius: 5px;
-  margin: 5px;
 }
 
 .cell {
@@ -164,11 +174,6 @@ input[type="text"]:focus {
   background-color: var(--focus-color);
 }
 
-#code-example {
-  border: 3px var(--method-border) solid;
-  border-radius: 5px;
-  margin: 5px;
-}
 #code-example pre {
   margin-top: 0;
   margin-bottom: 0;

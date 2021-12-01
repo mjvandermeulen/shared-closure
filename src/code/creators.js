@@ -10,8 +10,6 @@ function nameDiv(methodKey) {
 }
 
 function validationError() {
-  // ***** use the methodKey from the "row" class
-  // remove it as a parameter here.
   const d = document.createElement("div");
   d.classList.add("collapsed", "validation-error", "wrapper");
   const content = document.createTextNode("Fill in all the boxes below");
@@ -60,11 +58,10 @@ function checkButton(methodKey) {
 function methodRow(methodKey) {
   const method = results[methodKey];
   const row = document.createElement("div");
-  row.classList.add("method", `method-${methodKey}`);
+  row.classList.add("method", `method-${methodKey}`, "segment");
   row.appendChild(nameDiv(methodKey));
   row.appendChild(validationError());
   for (let i = 0; i < method.list.length; i++) {
-    // left off HERE ******** change to
     row.appendChild(inputCell(methodKey, i));
     row.appendChild(answerWrapper(methodKey, i));
   }

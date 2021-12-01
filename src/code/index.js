@@ -42,19 +42,10 @@ function toggleSyntaxHighlighting() {
 window.onload = () => {
   displaySampleCode();
   createChallenges();
-  measureAnswerHeight(); // ***** I think this works here
-  // since the inserting of code is synchronous
-  inps = document
-    .querySelectorAll("#challenge .method-addOne input")
-    .forEach((inp) => {
-      console.log("here");
-      inp.value = 1;
-    });
+  measureAnswerHeight();
   requestSwitchState("addOne", "checking");
 };
 
-window.onresize = () => {
-  measureAnswerHeight();
-};
+window.onresize = measureAnswerHeight;
 
-//MDN: document.body.onload https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+//MDN: document.body.onload https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement ****

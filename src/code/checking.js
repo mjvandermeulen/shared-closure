@@ -1,3 +1,29 @@
+// vanilla JS:
+// make sure this file is called last in index.html!
+
+const results = {
+  addOne: {
+    name: "c1()",
+    list: c1Answers, // change list to answers: [] ****
+    state: "base",
+  },
+  addFive: {
+    name: "c5()",
+    list: c5Answers,
+    state: "base",
+  },
+  addDotOne: {
+    name: "c.byOnes()",
+    list: cByOnesAnswers,
+    state: "base",
+  },
+  addDotFive: {
+    name: "c.byFives()",
+    list: cByFivesAnswers,
+    state: "base",
+  },
+};
+
 function changeButtonText(methodKey, text) {
   document.querySelector(
     `#challenge .method-${methodKey} button.check`
@@ -56,14 +82,8 @@ function showValidationError(methodKey, show) {
 }
 
 function matchState(methodKey) {
-  console.log("Match State: " + results[methodKey].state);
+  // console.log("Matching State: " + results[methodKey].state);
   switch (results[methodKey].state) {
-    case "base":
-      showValidationError(methodKey, false);
-      checkAnswers(methodKey, false); // called by matchState
-      changeButtonText(methodKey, "Check");
-      showAnswers(methodKey, false);
-      break;
     case "validation-error":
       showValidationError(methodKey, true);
       checkAnswers(methodKey, false); // called by matchState
@@ -81,10 +101,12 @@ function matchState(methodKey) {
       changeButtonText(methodKey, "Hide");
       checkAnswers(methodKey, true);
       showAnswers(methodKey, true);
-      console.log("showing case " + methodKey);
       break;
     default:
-      console.log("no default implemented yet ****");
+      showValidationError(methodKey, false);
+      checkAnswers(methodKey, false); // called by matchState
+      changeButtonText(methodKey, "Check");
+      showAnswers(methodKey, false);
       break;
   }
 }
@@ -105,9 +127,9 @@ function validateInputs(methodKey) {
 }
 
 function requestSwitchState(methodKey, reqState, force = false) {
-  console.log(
-    "request Switch State: " + results[methodKey].state + " -> " + reqState
-  );
+  // console.log(
+  //   "Request Switch State: " + results[methodKey].state + " -> " + reqState
+  // );
   if (force) {
     results[methodKey].state = reqState;
   } else {
@@ -150,12 +172,10 @@ function requestSwitchState(methodKey, reqState, force = false) {
 }
 
 function handleInputChange(event, methodKey, i) {
-  // **** cleanup. event needed?
   requestSwitchState(methodKey, "base");
 }
 
 function handleCheckClick(event, methodKey) {
-  // **** cleanup. event needed?
   if (results[methodKey].state === "validation-error") {
     requestSwitchState(methodKey, "base", true);
   } else if (results[methodKey].state === "checked") {
