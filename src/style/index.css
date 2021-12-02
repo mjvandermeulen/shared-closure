@@ -1,8 +1,7 @@
 :root {
-  /* start with educated guess, so no far transition will take place init. */
+  /* *** cut corner: alternative: temp remove transition, after initial measure
+  for now: start with educated guess, so no far transition will take place init. */
   --answer-height: 50; /* no unit ("px") integer, so you can get the neg value */
-  --border: turquoise;
-  --segment-border-color: #bfbfbf;
   --focus-color: #e5fbf9;
 }
 
@@ -18,26 +17,28 @@ button {
   font-size: inherit;
 }
 
+.segment {
+  border: 3px #bfbfbf solid;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.cell {
+  margin: 5px;
+  padding: 5px;
+  border: 3px turquoise solid;
+  border-radius: 5px;
+}
+
 #intro {
   padding: 20px;
   text-align: center;
 }
 
-/* cell need to go here */
-
-.segment {
-  border: 3px var(--segment-border-color) solid;
-  border-radius: 5px;
-  margin: 5px;
-}
-
-/* move */
 #challenge button:focus {
   outline: none;
   background-color: var(--focus-color);
 }
-
-/* grid */
 
 #challenge .method {
   display: grid;
@@ -47,18 +48,11 @@ button {
   otherwise the results row will have a gap, even when height is 0 */
 }
 
-.cell {
-  margin: 5px;
-  padding: 5px;
-  border: 3px var(--border) solid;
-  border-radius: 5px;
-}
-
-.method .cell {
+#challenge .method .cell {
   grid-row: 1/5;
 }
 
-.method .name {
+#challenge .method .name {
   grid-row: 1/2;
   grid-column: 1/5;
   border-color: transparent;
@@ -66,36 +60,36 @@ button {
   margin: 0;
 }
 
-.method .validation-error.wrapper {
+#challenge .method .validation-error.wrapper {
   grid-row: 2/3;
   grid-column: 1/4;
 }
 
-.method .inp {
+#challenge .method .inp {
   grid-row: 3/4;
 }
-.method .ans {
+#challenge .method .ans {
   grid-row: 4/5;
 }
 
-.method .check {
+#challenge .method .check {
   grid-row: 2/5;
 }
 
 /* validation-error */
-.method .validation-error.wrapper {
+#challenge .method .validation-error.wrapper {
   transition: max-height 2s, opacity 2s;
   overflow: hidden;
   max-height: calc(var(--answer-height) * 1.5 * 1px); /* guess work ****/
   opacity: 1;
 }
 
-.method .validation-error.wrapper.collapsed {
+#challenge .method .validation-error.wrapper.collapsed {
   max-height: 0;
   opacity: 0;
 }
 
-.method .validation-error .cell {
+#challenge .method .validation-error .cell {
   border: none;
   padding-bottom: 0;
   margin-bottom: 0;
@@ -103,7 +97,7 @@ button {
 }
 
 /* show answer transition */
-.method .ans.wrapper {
+#challenge .method .ans.wrapper {
   overflow: hidden;
   /* use * 1.5 for delayed drop down effect */
   /* LEARN **** how to add "px" unit to value */
@@ -112,27 +106,27 @@ button {
   opacity: 1;
 }
 
-.method .ans.collapsed {
-  max-height: 0;
-  opacity: 0;
-}
-
-.ans .cell {
+#challenge .method .ans .cell {
   transition: transform 2s;
   transform: translateY((0));
 }
 
-.method .ans.collapsed .cell {
+#challenge .method .ans.collapsed {
+  max-height: 0;
+  opacity: 0;
+}
+
+#challenge .method .ans.collapsed .cell {
   transform: translateY(calc(var(--answer-height) * -1 * 1px));
 }
 
-.method .inp.cell.incorrect {
+#challenge .method .inp.cell.incorrect {
   border-color: pink;
   position: relative;
   padding-left: 20px;
 }
 
-.method .inp.cell.incorrect::before {
+#challenge .method .inp.cell.incorrect::before {
   content: "";
   background: no-repeat center/80% url("../img/incorrect.png"); /* 2850 × 2850 pixels */
   width: 1em;
@@ -141,22 +135,19 @@ button {
   left: 0.5ch;
 }
 
-.method .inp.cell.correct {
+#challenge .method .inp.cell.correct {
   border-color: #40e08d;
   position: relative;
   padding-left: 20px;
 }
 
-.method .inp.cell.correct::before {
+#challenge .method .inp.cell.correct::before {
   content: "";
   background: no-repeat center/100% url("../img/correct.png"); /* 512 x 512 px */
   width: 1em;
   height: 1em;
-  /* display: block; */
   position: absolute;
   left: 0.5ch;
-  /* right: 0;
-  top: 0; */
 }
 
 /* input */
@@ -169,7 +160,7 @@ input[type="text"] {
   border-radius: 5px;
 }
 
-div.inp:focus-within,
+div.inp:focus-within, /* target the whole div with color */
 input[type="text"]:focus {
   background-color: var(--focus-color);
 }
@@ -180,7 +171,7 @@ input[type="text"]:focus {
 }
 
 #code-example {
-  position: relative;
+  position: relative; /* needed for child */
 }
 
 #code-example .syntax-toggle-wrapper {
@@ -199,32 +190,32 @@ input[type="text"]:focus {
 @media only screen and (min-width: 500px) {
   #challenge .method {
     grid-template-columns: 110px repeat(3, 1fr) 2fr;
-    grid-template-rows: min-content 1fr min-content; /* LEARN */
+    grid-template-rows: min-content 1fr min-content; /* LEARN min-content*/
   }
-  .method .cell {
+  #challenge .method .cell {
     grid-row: 1/4;
     margin: 10px;
     padding: 10px;
   }
 
-  .method .name {
+  #challenge .method .name {
     grid-row: 1/4;
     grid-column: 1/2;
   }
 
-  .method .validation-error.wrapper {
+  #challenge .method .validation-error.wrapper {
     grid-row: 1/2;
     grid-column: 2/5;
   }
 
-  .method .inp {
+  #challenge .method .inp {
     grid-row: 2/3;
   }
-  .method .ans {
+  #challenge .method .ans {
     grid-row: 3/4;
   }
 
-  .method .check {
+  #challenge .method .check {
     grid-row: 1/4;
   }
 }
