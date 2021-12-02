@@ -151,17 +151,30 @@ button {
 }
 
 /* input */
-input[type="text"] {
+/* hide up and down arrows */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"] {
+  font-size: inherit;
   font-family: inherit;
   border: none;
   outline: none;
-  /* height: 80%; */
   width: 100%;
   border-radius: 5px;
 }
 
 div.inp:focus-within, /* target the whole div with color */
-input[type="text"]:focus {
+input[type="number"]:focus {
   background-color: var(--focus-color);
 }
 
@@ -187,7 +200,7 @@ input[type="text"]:focus {
   top: 10px;
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 480px) {
   #challenge .method {
     grid-template-columns: 110px repeat(3, 1fr) 2fr;
     grid-template-rows: min-content 1fr min-content; /* LEARN min-content*/

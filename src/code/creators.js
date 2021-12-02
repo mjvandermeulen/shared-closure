@@ -22,7 +22,7 @@ function validationError() {
 function inputCell(methodKey, i) {
   const d = document.createElement("div");
   const inp = document.createElement("input");
-  inp.type = "text";
+  inp.type = "number";
   inp.placeholder = INPUTPLACEHOLDER;
   inp.onkeyup = (event) => {
     handleInputChange(event, methodKey, i);
