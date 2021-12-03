@@ -3,6 +3,7 @@
   for now: start with educated guess, so no far transition will take place init. */
   --answer-height: 50; /* no unit ("px") integer, so you can get the neg value */
   --focus-color: #e5fbf9;
+  --site-grey: #bfbfbf;
 }
 
 body {
@@ -18,7 +19,7 @@ button {
 }
 
 .segment {
-  border: 3px #bfbfbf solid;
+  border: 3px var(--site-grey) solid;
   border-radius: 5px;
   margin: 5px;
 }
@@ -30,9 +31,40 @@ button {
   border-radius: 5px;
 }
 
-#intro {
+#intro,
+#footer {
   padding: 20px;
   text-align: center;
+}
+
+#footer {
+  color: var(--site-grey); /* *** dry up with var(-- */
+}
+
+#footer a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+#footer svg {
+  height: 15px;
+  width: auto;
+}
+
+#footer svg path {
+  fill: var(--site-grey);
+}
+
+#footer:hover {
+  color: darkgray;
+}
+
+#footer:hover span.color {
+  color: turquoise;
+}
+
+#footer:hover svg path {
+  fill: turquoise;
 }
 
 #challenge button:focus {
